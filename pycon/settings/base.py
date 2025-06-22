@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
     "wagtail.embeds",
+    "wagtail.locales",
     "wagtail.sites",
     "wagtail.users",
     "wagtail.snippets",
@@ -62,11 +63,13 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "pycon.middleware.LocaleMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
+URL_PREFIX = "2025/"
 ROOT_URLCONF = "pycon.urls"
 BUILD_DIR = os.path.join(BASE_DIR, "_build")
 BAKERY_VIEWS = (
@@ -129,13 +132,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "zh-cn"
+LANGUAGE_CODE = "zh-hans"
 
 TIME_ZONE = "Asia/Shanghai"
 
 USE_I18N = True
-
+WAGTAIL_I18N_ENABLED = True
 USE_TZ = True
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ("zh-hans", "简体中文"),
+    ("en", "English"),
+]
 
 
 # Static files (CSS, JavaScript, Images)
