@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block body_class %}template-searchresults{% endblock %}
+
+{% block title %}搜索{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h1 class="page-title">搜索</h1>
+    </div>
+
+    <div class="search-form">
+        <form action="{% url 'search' %}" method="get">
+            <div class="search-input-group">
+                <input type="text" name="query" class="search-input"
+                       placeholder="输入搜索关键词..."
+                       {% if search_query %}value="{{ search_query }}"{% endif %}>
+                <button type="submit" class="search-button">
+                    <i class="fa-solid fa-search"></i> 搜索
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {% if search_results %}
+    <div class="search-results">
+        {% for result in search_results %}
+        <div class="search-result-item">
+            <a href="{% pageurl result %}" class="search-result-title">{{ result }}</a>
+            {% if result.search_description %}
+                <div class="search-result-snippet">{{ result.search_description }}</div>
+            {% endif %}
+            <div class="search-result-meta">{{ result.content_type.model|title }}</div>
+        </div>
+        {% endfor %}
+
+        <div class="search-pagination">
+            {% if search_results.has_previous %}
+                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}"
+                   class="search-button">上一页</a>
+            {% endif %}
+
+            {% if search_results.has_next %}
+                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}"
+                   class="search-button">下一页</a>
+            {% endif %}
+        </div>
+    </div>
+    {% elif search_query %}
+    <div class="search-no-results">
+        <div>
+            <i class="fa-solid fa-search"></i>
+        </div>
+        <div>未找到相关结果</div>
+        <div style="margin-top: 10px; font-size: 1rem; opacity: 0.7;">
+            尝试使用不同的关键词进行搜索
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

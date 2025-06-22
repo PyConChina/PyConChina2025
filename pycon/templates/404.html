@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}页面未找到{% endblock %}
+
+{% block body_class %}template-404{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/talk.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">404</h1>
+        <div style="font-size: 1.2rem; margin-top: 10px; opacity: 0.9; color: white;">
+            页面未找到
+        </div>
+    </header>
+
+    <div class="talk-content" style="text-align: center;">
+        <div style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;">
+            🔍
+        </div>
+        <p style="font-size: 1.1rem; color: #6b5563; margin-bottom: 30px;">
+            抱歉，您访问的页面不存在或已被移动。
+        </p>
+        <a href="/" class="page-button">
+            <i class="fa-solid fa-home"></i> 返回首页
+        </a>
+    </div>
+</div>
+{% endblock %}
