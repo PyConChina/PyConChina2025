@@ -2,4 +2,4 @@
 set -ex
 
 python manage.py migrate --noinput
-gunicorn pycon.wsgi:application
+exec gunicorn pycon.wsgi:application

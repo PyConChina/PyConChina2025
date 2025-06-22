@@ -1,15 +1,5 @@
-@font-face {
-  font-family: "JF-Dot";
-  src: url("../fonts/JF-Dot-MPlusS10B.ttf") format("truetype");
-  font-weight: bold;
-}
-
 html {
     font-size: 18px; /* Increased base font size */
-}
-
-.dot-font {
-    font-family: "JF-Dot", sans-serif;
 }
 
 body {
