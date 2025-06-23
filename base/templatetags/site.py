@@ -4,7 +4,9 @@ from datetime import time
 from typing import TYPE_CHECKING
 
 from django import template
-from wagtail.models import Site
+from django.conf import settings
+from django.utils import translation
+from wagtail.models import Page, Site
 
 if TYPE_CHECKING:
     from schedule.models import Schedule
@@ -14,7 +16,12 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def get_site_root(context):
-    return Site.find_for_request(context["request"]).root_page
+    language_code = translation.get_language()
+    return (
+        Site.find_for_request(context["request"])
+        .root_page.get_translations(inclusive=True)
+        .get(locale__language_code=language_code)
+    )
 
 
 def get_time_delta_minutes(a: time, b: time) -> int:
@@ -32,3 +39,28 @@ def get_span(schedule: Schedule, start_time: time) -> tuple[int, int]:
 @register.filter
 def divide(value: int, by: int) -> int:
     return value // int(by)
+
+
+@register.simple_tag
+def get_translations(page: Page) -> list[Page]:
+    return list(page.get_translations(inclusive=True).live())
+
+
+@register.simple_tag(takes_context=True)
+def i18n_url(context, page: Page) -> str:
+    url = page.get_url(request=context.get("request"))
+    if not url:
+        return url
+    if page.locale.language_code != settings.LANGUAGE_CODE:
+        url = url.replace(
+            f"/{settings.URL_PREFIX}",
+            f"/{settings.URL_PREFIX}{page.locale.language_code}/",
+        )
+    return url
+
+
+@register.simple_tag
+def get_coc_page() -> Page | None:
+    language_code = translation.get_language()
+    page = Page.objects.filter(slug="coc", locale__language_code=language_code).first()
+    return page

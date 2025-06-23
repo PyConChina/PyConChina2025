@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static i18n %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/talk.css' %}">
@@ -49,7 +49,7 @@
 
     {% if page.abstract %}
         <div class="talk-content">
-            <h3 style="color: #6b46c1; margin-bottom: 20px;">摘要</h3>
+            <h3 style="color: #6b46c1; margin-bottom: 20px;">{% translate "Abstract" %}</h3>
             <div class="talk-abstract">
                 {{ page.abstract }}
             </div>
@@ -57,7 +57,7 @@
     {% endif %}
 
     <div class="talk-content">
-        <h3 style="color: #6b46c1; margin-bottom: 20px;">详细内容</h3>
+        <h3 style="color: #6b46c1; margin-bottom: 20px;">{% translate "Details" %}</h3>
         <div class="content">
             {{ page.body|richtext }}
         </div>

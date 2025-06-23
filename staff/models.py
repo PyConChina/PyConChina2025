@@ -4,7 +4,7 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import RichTextField
-from wagtail.models import Orderable, Page
+from wagtail.models import Orderable, Page, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
 # Create your models here.
@@ -34,7 +34,7 @@ class StaffCategory(Orderable, ClusterableModel):
 
 
 @register_snippet
-class Staff(models.Model):
+class Staff(TranslatableMixin, models.Model):
     name = models.CharField(max_length=32)
     bio = models.CharField(max_length=255, blank=True)
     avatar = models.ForeignKey(
@@ -51,7 +51,7 @@ class Staff(models.Model):
         FieldPanel("avatar"),
     ]
 
-    class Meta:
+    class Meta(TranslatableMixin.Meta):
         verbose_name = "Staff"
         verbose_name_plural = "Staff"
 

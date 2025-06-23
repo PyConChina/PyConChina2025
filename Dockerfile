@@ -58,7 +58,7 @@ USER wagtail
 ENV PATH=/app/.venv/bin:$PATH
 
 # Collect static files.
-RUN python manage.py collectstatic --noinput --clear
+RUN python manage.py collectstatic --noinput --clear && python manage.py compilemessages
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:

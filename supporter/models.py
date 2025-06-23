@@ -4,7 +4,7 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import RichTextField
-from wagtail.models import Orderable, Page
+from wagtail.models import Orderable, Page, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
 # Create your models here.
@@ -34,7 +34,7 @@ class SupporterTier(Orderable, ClusterableModel):
 
 
 @register_snippet
-class Supporter(models.Model):
+class Supporter(TranslatableMixin, models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255, blank=True)
     logo = models.ForeignKey(

@@ -9,6 +9,7 @@
     position: relative;
     height: 100vh;
     overflow: hidden;
+    margin-bottom: 80px;
 }
 
 .banner h1 {

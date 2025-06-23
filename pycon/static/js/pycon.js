@@ -45,15 +45,63 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeMobileMenu();
+                closeLanguageDropdowns();
             }
         });
 
-        // 窗口大小改变时关闭移动端菜单
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                closeMobileMenu();
-            }
-        });
+        // 语言切换下拉菜单功能
+        const initLanguageDropdowns = () => {
+            // 桌面端语言下拉菜单
+            const languageDropdown = document.getElementById('languageDropdown');
+            const languageDropdownMenu = document.getElementById('languageDropdownMenu');
+
+            // 切换桌面端下拉菜单
+            const toggleLanguageDropdown = (e) => {
+                e.stopPropagation();
+                const isActive = languageDropdown.classList.contains('active');
+
+                if (isActive) {
+                    closeLanguageDropdown();
+                } else {
+                    openLanguageDropdown();
+                }
+            };
+
+            // 打开桌面端下拉菜单
+            const openLanguageDropdown = () => {
+                languageDropdown?.classList.add('active');
+                languageDropdownMenu?.classList.add('show');
+            };
+
+            // 关闭桌面端下拉菜单
+            const closeLanguageDropdown = () => {
+                languageDropdown?.classList.remove('active');
+                languageDropdownMenu?.classList.remove('show');
+            };
+
+            // 全局关闭语言下拉菜单
+            window.closeLanguageDropdowns = () => {
+                closeLanguageDropdown();
+            };
+
+            // 绑定事件
+            languageDropdown?.addEventListener('click', toggleLanguageDropdown);
+
+            // 点击页面其他地方关闭下拉菜单
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.language-dropdown')) {
+                    closeLanguageDropdowns();
+                }
+            });
+
+            // 阻止下拉菜单内部点击事件冒泡
+            languageDropdownMenu?.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        };
+
+        // 初始化语言下拉菜单
+        initLanguageDropdowns();
     };
 
     // 初始化导航栏
@@ -152,6 +200,7 @@ const pageLoadAnimation = () => {
 
 // 初始化所有功能
 const initializeEnhancements = () => {
+    initModernNavbar();
     observeCards();
     initSmoothScroll();
     addFloatingAnimation();

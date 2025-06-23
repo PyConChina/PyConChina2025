@@ -1,15 +1,16 @@
 from __future__ import annotations
 
-from datetime import date, datetime, timezone
+from datetime import date, datetime
 
 from django.db import models
 from django.db.models import QuerySet
 from django.http import HttpResponse
 from django.utils.timezone import make_aware
+from django.utils.translation import gettext as _
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.fields import RichTextField
-from wagtail.models import Orderable, Page, ParentalKey
+from wagtail.models import Orderable, Page, ParentalKey, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
 
@@ -34,9 +35,10 @@ class ScheduleListPage(RoutablePageMixin, Page):
 
     @path("ical/")
     def ical(self, request):
+        from uuid import uuid4
+
         from ics import Calendar, Event
         from ics.contentline import ContentLine
-        from uuid import uuid4
 
         cal = Calendar()
         schedules: QuerySet[Schedule] = self.schedules.order_by("date", "start_time")
@@ -45,7 +47,7 @@ class ScheduleListPage(RoutablePageMixin, Page):
             if schedule.room:
                 location = f"{schedule.room.name} ({schedule.room.address})"
             else:
-                location = "主会场"
+                location = _("Main Venue")
             event.uid = str(uuid4())
             event.extra.append(ContentLine(name="SUMMARY", value=str(schedule)))
             event.begin = make_aware(
@@ -54,12 +56,15 @@ class ScheduleListPage(RoutablePageMixin, Page):
             event.end = make_aware(datetime.combine(schedule.date, schedule.end_time))
             event.location = location
             if schedule.talk:
-                event.description = f"演讲人：{schedule.talk.authors.first().name}\n\n{schedule.talk.body}"
+                event.description = (
+                    _("Speaker")
+                    + f": {schedule.talk.authors.first().name}\n\n{schedule.talk.body}"
+                )
                 event.url = request.build_absolute_uri(schedule.talk.url)
             cal.events.append(event)
 
         response = HttpResponse(cal.serialize(), content_type="text/calendar")
-        response["Content-Disposition"] = 'attachment; filename="pycon-china-2024.ics"'
+        response["Content-Disposition"] = 'attachment; filename="pycon-china-2025.ics"'
         return response
 
 
@@ -104,7 +109,7 @@ class Schedule(Orderable):
 
 
 @register_snippet
-class Room(models.Model):
+class Room(TranslatableMixin, models.Model):
     name = models.CharField(max_length=32, help_text="Name of the room")
     address = models.CharField(
         max_length=255, help_text="Address of the room", blank=True

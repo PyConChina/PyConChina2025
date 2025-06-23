@@ -1,14 +1,15 @@
-{% extends {% block content %}
+{% extends "base.html" %}
+{% block content %}
+{% load static i18n %}
 <div class="page-container">
     <header class="page-header">
         <h1 class="page-title">500</h1>
         <div style="font-size: 1.2rem; margin-top: 10px; opacity: 0.9; color: white;">
-            服务器内部错误
+            {% translate "Internal server error" %}
         </div>
-    </header>ml" %}
-{% load static %}
+    </header>
 
-{% block title %}服务器错误{% endblock %}
+{% block title %}{% translate "Internal server error" %}{% endblock %}
 
 {% block body_class %}template-500{% endblock %}
 
@@ -21,7 +22,7 @@
     <header class="talk-header">
         <h1 class="talk-title">500</h1>
         <div style="font-size: 1.2rem; margin-top: 10px; opacity: 0.9;">
-            服务器内部错误
+            {% translate "Internal server error" %}
         </div>
     </header>
 
@@ -30,10 +31,10 @@
             🔧
         </div>
         <p style="font-size: 1.1rem; color: #6b5563; margin-bottom: 30px;">
-            抱歉，服务器遇到了一些问题。请稍后再试。
+            {% translate "Sorry, the server encountered an issue. Please try again later." %}
         </p>
         <a href="/" class="page-button">
-            <i class="fa-solid fa-home"></i> 返回首页
+            <i class="fa-solid fa-home"></i> {% translate "Return to homepage" %}
         </a>
     </div>
 </div>

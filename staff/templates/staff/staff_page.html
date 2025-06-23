@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/staff.css' %}">
@@ -31,8 +31,7 @@
                         <div class="staff-role">{{ staff.bio }}</div>
                     {% endif %}
                     <div class="staff-contact">
-                        <!-- 可以在这里添加社交媒体链接等 -->
-                        <a href="#" title="联系方式">
+                        <a href="#" title="{% translate 'Contact' %}">
                             <i class="fa-solid fa-envelope"></i>
                         </a>
                     </div>

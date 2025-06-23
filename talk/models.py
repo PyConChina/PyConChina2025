@@ -3,7 +3,7 @@ from django.db import models
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
-from wagtail.models import Page
+from wagtail.models import Page, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
 
@@ -47,7 +47,7 @@ class TalkPage(Page):
 
 
 @register_snippet
-class Author(models.Model):
+class Author(TranslatableMixin, models.Model):
     name = models.CharField(max_length=255, help_text="Name of the author")
     avatar = models.ForeignKey(
         "wagtailimages.Image", on_delete=models.CASCADE, related_name="+"

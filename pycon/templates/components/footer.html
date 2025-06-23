@@ -1,3 +1,4 @@
+{% load i18n site %}
 <footer class="modern-footer">
     <div class="footer-background"></div>
     <div class="footer-container">
@@ -9,7 +10,7 @@
                     <img src="{% static 'images/logo.png' %}" alt="PyCon China 2025" class="footer-logo-img">
                     <div class="footer-brand-text">
                         <h3 class="footer-title">PyCon China 2025</h3>
-                        <p class="footer-subtitle">中国Python开发者大会</p>
+                        <p class="footer-subtitle">中国 Python 开发者大会</p>
                     </div>
                 </div>
 
@@ -29,7 +30,7 @@
 
             <!-- 往届大会 -->
             <div class="footer-section">
-                <h4 class="section-title">往届大会</h4>
+                <h4 class="section-title">{% translate "Previous Conferences" %}</h4>
                 <div class="conferences-grid">
                     <a href="https://cn.pycon.org/2024/" target="_blank" class="conference-link">2024</a>
                     <a href="https://cn.pycon.org/2023/" target="_blank" class="conference-link">2023</a>
@@ -49,28 +50,31 @@
             </div>
 
             <!-- 快速链接 -->
+            {% get_coc_page as coc_page %}
             <div class="footer-section">
-                <h4 class="section-title">快速链接</h4>
+                <h4 class="section-title">{% translate "Quick links" %}</h4>
                 <div class="quick-links">
-                    <a href="/2025/coc" class="quick-link">
+                  {% if coc_page %}
+                    <a href="{% i18n_url coc_page %}" class="quick-link">
                         <i class="fa-solid fa-code"></i>
-                        <span>行为准则</span>
+                        <span>{{ coc_page.title }}</span>
                     </a>
+                  {% endif %}
                     <a href="#" class="quick-link">
                         <i class="fa-solid fa-hands-helping"></i>
-                        <span>志愿者招募</span>
+                        <span>{% translate "Volunteer Recruitment" %}</span>
                     </a>
                 </div>
             </div>
 
             <!-- 联系信息 -->
             <div class="footer-section">
-                <h4 class="section-title">联系方式</h4>
+                <h4 class="section-title">{% translate "Contact Information" %}</h4>
                 <div class="contact-info">
                     <div class="quick-links">
                         <a class="quick-link" href="mailto:conference@python-china.org.cn">
                             <i class="fa-solid fa-envelope"></i>
-                            电子邮件
+                            {% translate "Email" %}
                         </a>
                     </div>
                     <div class="quick-links">
@@ -87,10 +91,10 @@
         <div class="footer-bottom">
             <div class="footer-bottom-content">
                 <div class="copyright">
-                    <p>&copy; 2025 PyCon China. All rights reserved.</p>
+                    <p>&copy; 2025 PyCon China. {% translate "All rights reserved." %}</p>
                 </div>
                 <div class="footer-tech">
-                    <span>Powered by Python & Wagtail</span>
+                    <span>{% translate "Powered by Python & Wagtail" %}</span>
                     <div class="tech-icons">
                         <i class="fab fa-python"></i>
                     </div>

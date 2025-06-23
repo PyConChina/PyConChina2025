@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "staff",
     "bakery",
     "wagtailbakery",
+    "wagtail.contrib.simple_translation",
     "wagtail.contrib.routable_page",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -97,7 +98,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "pycon.wsgi.application"
-
+WAGTAILSIMPLETRANSLATION_SYNC_PAGE_TREE = True
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -139,6 +140,8 @@ TIME_ZONE = "Asia/Shanghai"
 USE_I18N = True
 WAGTAIL_I18N_ENABLED = True
 USE_TZ = True
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
 
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ("zh-hans", "简体中文"),
