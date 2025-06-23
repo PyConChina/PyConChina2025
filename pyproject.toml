@@ -11,6 +11,7 @@ dependencies = [
     "wagtail-bakery>=0.8.0",
     "ics-vtimezones>=2020.2",
     "ics @ git+https://github.com/ics-py/ics-py.git@main",
+    "dj-database-url>=3.0.0",
 ]
 requires-python = ">=3.12"
 readme = "README.md"

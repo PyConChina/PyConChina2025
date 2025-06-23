@@ -25,6 +25,7 @@ RUN pdm install --check
 
 FROM python:${PYTHON_IMAGE}
 
+RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends gettext
 # Add user that will be used in the container.
 RUN useradd wagtail
 
@@ -37,7 +38,9 @@ EXPOSE 8000
 #    command.
 ENV PYTHONUNBUFFERED=1 \
     PORT=8000 \
-    DJANGO_SETTINGS_MODULE=pycon.settings.production
+    DJANGO_SETTINGS_MODULE=pycon.settings.production \
+    STATIC_ROOT=/app/data/static \
+    MEDIA_ROOT=/app/data/media
 
 WORKDIR /app
 
@@ -57,8 +60,7 @@ USER wagtail
 
 ENV PATH=/app/.venv/bin:$PATH
 
-# Collect static files.
-RUN python manage.py collectstatic --noinput --clear && python manage.py compilemessages
+RUN python manage.py compilemessages
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
