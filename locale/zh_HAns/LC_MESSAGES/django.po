@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 11:03+0800\n"
+"POT-Creation-Date: 2025-06-27 09:20+0800\n"
 "PO-Revision-Date: 2025-01-16 10:00+0800\n"
 "Last-Translator: PyConChina Team <contact@pycon.org.cn>\n"
 "Language-Team: Chinese Simplified <zh-hans@li.org>\n"
@@ -26,16 +26,15 @@ msgstr "页面未找到"
 msgid "Sorry, the page you are looking for does not exist or has been moved."
 msgstr "抱歉，您要查找的页面不存在或已被移动。"
 
-#: pycon/templates/404.html:29 pycon/templates/500.html:37
+#: pycon/templates/404.html:29 pycon/templates/500.html:29
 msgid "Return to homepage"
 msgstr "返回首页"
 
-#: pycon/templates/500.html:8 pycon/templates/500.html:12
-#: pycon/templates/500.html:25
+#: pycon/templates/500.html:4 pycon/templates/500.html:17
 msgid "Internal server error"
 msgstr "内部服务器错误"
 
-#: pycon/templates/500.html:34
+#: pycon/templates/500.html:26
 msgid "Sorry, the server encountered an issue. Please try again later."
 msgstr "抱歉，服务器遇到问题。请稍后再试。"
 
@@ -48,22 +47,26 @@ msgid "Quick links"
 msgstr "快速链接"
 
 #: pycon/templates/components/footer.html:65
+msgid "Call for Papers"
+msgstr "主题征集"
+
+#: pycon/templates/components/footer.html:69
 msgid "Volunteer Recruitment"
 msgstr "志愿者招募"
 
-#: pycon/templates/components/footer.html:72
+#: pycon/templates/components/footer.html:76
 msgid "Contact Information"
 msgstr "联系方式"
 
-#: pycon/templates/components/footer.html:77
+#: pycon/templates/components/footer.html:81
 msgid "Email"
 msgstr "邮箱"
 
-#: pycon/templates/components/footer.html:94
+#: pycon/templates/components/footer.html:98
 msgid "All rights reserved."
 msgstr "保留所有权利。"
 
-#: pycon/templates/components/footer.html:97
+#: pycon/templates/components/footer.html:101
 msgid "Powered by Python & Wagtail"
 msgstr "由 Python 和 Wagtail 驱动"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 11:04+0800\n"
+"POT-Creation-Date: 2025-06-27 09:20+0800\n"
 "PO-Revision-Date: 2025-01-16 10:00+0800\n"
 "Last-Translator: PyConChina Team <contact@pycon.org.cn>\n"
 "Language-Team: English <en@li.org>\n"
@@ -26,16 +26,15 @@ msgstr "Page not found"
 msgid "Sorry, the page you are looking for does not exist or has been moved."
 msgstr "Sorry, the page you are looking for does not exist or has been moved."
 
-#: pycon/templates/404.html:29 pycon/templates/500.html:37
+#: pycon/templates/404.html:29 pycon/templates/500.html:29
 msgid "Return to homepage"
 msgstr "Return to homepage"
 
-#: pycon/templates/500.html:8 pycon/templates/500.html:12
-#: pycon/templates/500.html:25
+#: pycon/templates/500.html:4 pycon/templates/500.html:17
 msgid "Internal server error"
 msgstr "Internal Server Error"
 
-#: pycon/templates/500.html:34
+#: pycon/templates/500.html:26
 msgid "Sorry, the server encountered an issue. Please try again later."
 msgstr "Sorry, the server encountered an issue. Please try again later."
 
@@ -48,22 +47,26 @@ msgid "Quick links"
 msgstr "Quick links"
 
 #: pycon/templates/components/footer.html:65
+msgid "Call for Papers"
+msgstr "Call for Papers"
+
+#: pycon/templates/components/footer.html:69
 msgid "Volunteer Recruitment"
 msgstr "Volunteer Recruitment"
 
-#: pycon/templates/components/footer.html:72
+#: pycon/templates/components/footer.html:76
 msgid "Contact Information"
 msgstr "Contact Information"
 
-#: pycon/templates/components/footer.html:77
+#: pycon/templates/components/footer.html:81
 msgid "Email"
 msgstr "Email"
 
-#: pycon/templates/components/footer.html:94
+#: pycon/templates/components/footer.html:98
 msgid "All rights reserved."
 msgstr "All rights reserved."
 
-#: pycon/templates/components/footer.html:97
+#: pycon/templates/components/footer.html:101
 msgid "Powered by Python & Wagtail"
 msgstr "Powered by Python & Wagtail"
 
