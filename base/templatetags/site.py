@@ -45,6 +45,8 @@ def divide(value: int, by: int) -> int:
 
 @register.simple_tag
 def get_translations(page: Page) -> list[Page]:
+    if not isinstance(page, Page):
+        return []
     return list(page.get_translations(inclusive=True).live())
 
 
