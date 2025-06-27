@@ -17,10 +17,12 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def get_site_root(context):
     language_code = translation.get_language()
-    return (
-        Site.find_for_request(context["request"])
-        .root_page.get_translations(inclusive=True)
-        .get(locale__language_code=language_code)
+    if "request" in context:
+        site = Site.find_for_request(context["request"])
+    else:
+        site = Site.objects.first()
+    return site.root_page.get_translations(inclusive=True).get(
+        locale__language_code=language_code
     )
 
 
