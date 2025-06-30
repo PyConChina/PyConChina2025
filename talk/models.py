@@ -1,7 +1,11 @@
+import io
+
 from django import forms
 from django.db import models
+from django.http import HttpResponse
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.admin.panels import FieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.fields import RichTextField
 from wagtail.models import Page, TranslatableMixin
 from wagtail.snippets.models import register_snippet
@@ -29,7 +33,7 @@ class TalkListPage(Page):
         )
 
 
-class TalkPage(Page):
+class TalkPage(RoutablePageMixin, Page):
     parent_page_types = ["talk.TalkListPage"]
     abstract = models.TextField(blank=True)
     body = RichTextField(blank=True)
@@ -44,6 +48,18 @@ class TalkPage(Page):
         FieldPanel("body"),
         FieldPanel("type"),
     ]
+
+    @path("poster/")
+    def poster(self, request):
+        from talk.utils import render_poster
+
+        response = HttpResponse(content_type="image/png")
+        img = render_poster(self)
+        img_buffer = io.BytesIO()
+        img.save(img_buffer, "PNG")
+        response.write(img_buffer.getvalue())
+        response["Cache-Control"] = "public, max-age=86400"
+        return response
 
 
 @register_snippet

@@ -5,11 +5,15 @@
 <link rel="stylesheet" href="{% static 'css/talk.css' %}">
 {% endblock %}
 
+{% block og_image %}{{ request.build_absolute_uri }}poster/{% endblock %}
+{% block twitter_image %}{{ request.build_absolute_uri }}poster/{% endblock %}
+
 {% block content %}
 <div class="page-container">
     <header class="talk-header">
         <h1 class="talk-title">{{ page.title }}</h1>
         {% include "snippets/badge.html" %}
+
         {% if page.schedule %}
             <div class="talk-meta">
                 <div class="talk-meta-item">
@@ -19,6 +23,12 @@
                 <div class="talk-meta-item">
                     <i class="fa-solid fa-location-arrow"></i>
                     {{ page.schedule.room.name }}({{ page.schedule.room.address }})
+                </div>
+                <div class="talk-meta-item">
+                    <a href="poster/" target="_blank" class="btn btn-primary">
+                        <i class="fa-solid fa-image"></i>
+                        {% trans "Talk Poster" %}
+                    </a>
                 </div>
             </div>
         {% endif %}

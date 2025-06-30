@@ -12,6 +12,7 @@ dependencies = [
     "ics-vtimezones>=2020.2",
     "ics @ git+https://github.com/ics-py/ics-py.git@main",
     "dj-database-url>=3.0.0",
+    "pillow>=11.2.1",
 ]
 requires-python = ">=3.12"
 readme = "README.md"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-27 09:20+0800\n"
+"POT-Creation-Date: 2025-06-30 15:31+0800\n"
 "PO-Revision-Date: 2025-01-16 10:00+0800\n"
 "Last-Translator: PyConChina Team <contact@pycon.org.cn>\n"
 "Language-Team: Chinese Simplified <zh-hans@li.org>\n"
@@ -140,11 +140,15 @@ msgstr "圆桌讨论"
 msgid "Workshop"
 msgstr "工作坊"
 
-#: talk/templates/talk/talk_page.html:52
+#: talk/templates/talk/talk_page.html:30
+msgid "Talk Poster"
+msgstr "生成海报"
+
+#: talk/templates/talk/talk_page.html:62
 msgid "Abstract"
 msgstr "摘要"
 
-#: talk/templates/talk/talk_page.html:60
+#: talk/templates/talk/talk_page.html:70
 msgid "Details"
 msgstr "详情"
 
