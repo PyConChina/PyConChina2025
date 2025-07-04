@@ -1,6 +1,7 @@
 import io
 
 from django import forms
+from django.core.cache import cache
 from django.db import models
 from django.http import HttpResponse
 from modelcluster.fields import ParentalManyToManyField
@@ -54,10 +55,14 @@ class TalkPage(RoutablePageMixin, Page):
         from talk.utils import render_poster
 
         response = HttpResponse(content_type="image/png")
-        img = render_poster(self)
-        img_buffer = io.BytesIO()
-        img.save(img_buffer, "PNG")
-        response.write(img_buffer.getvalue())
+        key = f"talk_poster_{self.pk}"
+        if (image_bytes := cache.get(key, None)) is None:
+            img = render_poster(self)
+            image_buffer = io.BytesIO()
+            img.save(image_buffer, "PNG")
+            image_bytes = image_buffer.getvalue()
+            cache.set(key, image_bytes, 60 * 60 * 24)
+        response.write(image_bytes)
         response["Cache-Control"] = "public, max-age=86400"
         return response
 
