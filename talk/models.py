@@ -29,8 +29,10 @@ class TalkListPage(Page):
     ]
 
     def get_talks(self):
-        return self.get_children().filter(
-            talkpage__type__in=(TalkType.KEYNOTE, TalkType.LIGHTNING)
+        return (
+            self.get_children()
+            .live()
+            .filter(talkpage__type__in=(TalkType.KEYNOTE, TalkType.LIGHTNING))
         )
 
 
