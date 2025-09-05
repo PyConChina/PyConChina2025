@@ -33,6 +33,7 @@ class TalkListPage(Page):
             self.get_children()
             .live()
             .filter(talkpage__type__in=(TalkType.KEYNOTE, TalkType.LIGHTNING))
+            .order_by("talkpage__position", "id")
         )
 
 
@@ -44,13 +45,20 @@ class TalkPage(RoutablePageMixin, Page):
         max_length=32, choices=TalkType.choices, default=TalkType.KEYNOTE
     )
     authors = ParentalManyToManyField("talk.Author")
+    position = models.IntegerField(default=100, help_text="Position in the list")
 
     content_panels = Page.content_panels + [
         FieldPanel("authors", widget=forms.CheckboxSelectMultiple),
         FieldPanel("abstract"),
         FieldPanel("body"),
         FieldPanel("type"),
+        FieldPanel("position"),
     ]
+
+    def save(self, clean=True, user=None, log_action=False, **kwargs):
+        super().save(clean=clean, user=user, log_action=log_action, **kwargs)
+        # Sync position changes across translations
+        self.get_translations().update(position=self.position)
 
     @path("poster/")
     def poster(self, request):
