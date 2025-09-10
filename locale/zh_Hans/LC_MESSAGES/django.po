@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-30 15:31+0800\n"
+"POT-Creation-Date: 2025-09-10 10:22+0800\n"
 "PO-Revision-Date: 2025-01-16 10:00+0800\n"
 "Last-Translator: PyConChina Team <contact@pycon.org.cn>\n"
 "Language-Team: Chinese Simplified <zh-hans@li.org>\n"
@@ -71,11 +71,16 @@ msgid "Powered by Python & Wagtail"
 msgstr "由 Python 和 Wagtail 驱动"
 
 #: pycon/templates/components/navbar.html:25
-#: pycon/templates/components/navbar.html:97
+#: pycon/templates/components/navbar.html:119
 msgid "Home"
 msgstr "首页"
 
-#: pycon/templates/components/navbar.html:123
+#: pycon/templates/components/navbar.html:53
+#: pycon/templates/components/navbar.html:146
+msgid "Activities"
+msgstr "活动"
+
+#: pycon/templates/components/navbar.html:165
 msgid "Language"
 msgstr "语言"
 

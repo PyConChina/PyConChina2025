@@ -49,58 +49,60 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // 语言切换下拉菜单功能
+        // 语言/活动 下拉菜单功能
         const initLanguageDropdowns = () => {
-            // 桌面端语言下拉菜单
             const languageDropdown = document.getElementById('languageDropdown');
             const languageDropdownMenu = document.getElementById('languageDropdownMenu');
+            const activitiesDropdown = document.getElementById('activitiesDropdown');
+            const activitiesDropdownMenu = document.getElementById('activitiesDropdownMenu');
 
-            // 切换桌面端下拉菜单
-            const toggleLanguageDropdown = (e) => {
+            const openDropdown = (btn, menu) => {
+                btn?.classList.add('active');
+                menu?.classList.add('show');
+            };
+
+            const closeDropdown = (btn, menu) => {
+                btn?.classList.remove('active');
+                menu?.classList.remove('show');
+            };
+
+            const makeToggleHandler = (btn, menu) => (e) => {
                 e.stopPropagation();
-                const isActive = languageDropdown.classList.contains('active');
-
-                if (isActive) {
-                    closeLanguageDropdown();
-                } else {
-                    openLanguageDropdown();
+                if (!btn) return;
+                const isActive = btn.classList.contains('active');
+                // 先关闭所有
+                closeAllDropdowns();
+                if (!isActive) {
+                    openDropdown(btn, menu);
                 }
             };
 
-            // 打开桌面端下拉菜单
-            const openLanguageDropdown = () => {
-                languageDropdown?.classList.add('active');
-                languageDropdownMenu?.classList.add('show');
+            const closeAllDropdowns = () => {
+                closeDropdown(languageDropdown, languageDropdownMenu);
+                closeDropdown(activitiesDropdown, activitiesDropdownMenu);
             };
 
-            // 关闭桌面端下拉菜单
-            const closeLanguageDropdown = () => {
-                languageDropdown?.classList.remove('active');
-                languageDropdownMenu?.classList.remove('show');
-            };
-
-            // 全局关闭语言下拉菜单
+            // 全局暴露关闭方法（供 ESC/外部点击 调用）
             window.closeLanguageDropdowns = () => {
-                closeLanguageDropdown();
+                closeAllDropdowns();
             };
 
-            // 绑定事件
-            languageDropdown?.addEventListener('click', toggleLanguageDropdown);
+            languageDropdown?.addEventListener('click', makeToggleHandler(languageDropdown, languageDropdownMenu));
+            activitiesDropdown?.addEventListener('click', makeToggleHandler(activitiesDropdown, activitiesDropdownMenu));
 
             // 点击页面其他地方关闭下拉菜单
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.language-dropdown')) {
-                    closeLanguageDropdowns();
+                    closeAllDropdowns();
                 }
             });
 
             // 阻止下拉菜单内部点击事件冒泡
-            languageDropdownMenu?.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
+            languageDropdownMenu?.addEventListener('click', (e) => e.stopPropagation());
+            activitiesDropdownMenu?.addEventListener('click', (e) => e.stopPropagation());
         };
 
-        // 初始化语言下拉菜单
+        // 初始化语言/活动 下拉菜单
         initLanguageDropdowns();
     };
 
