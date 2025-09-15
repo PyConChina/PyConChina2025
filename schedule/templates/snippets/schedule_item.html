@@ -3,10 +3,11 @@
 <div
     class="schedule-table-item"
     style="
-        grid-row-start: {{ span.0|divide:"5"|add:"2" }}; grid-row-end: {{ span.1|divide:"5"|add:"2" }};
         {% if index == 1 %}
+            grid-row-start: {{ span.0|divide:"5"|add:"1" }}; grid-row-end: {{ span.1|divide:"5"|add:"1" }};
             grid-column-start: 1; grid-column-end: {{ columns|length }};
         {% else %}
+            grid-row-start: {{ span.0|divide:"5"|add:"1" }}; grid-row-end: {{ span.1|divide:"5"|add:"1" }};
             grid-column-start: {{ index|add:"-1" }};
         {% endif %}
     "
