@@ -23,7 +23,7 @@
     border: 2px dashed #d6bef8;
     border-radius: 15px;
     grid-template-rows: 80px;
-    grid-auto-rows: 15px;
+    grid-auto-rows: 30px;
     background: rgba(248, 250, 252, 0.5);
 }
 
