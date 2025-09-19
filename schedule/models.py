@@ -5,7 +5,6 @@ from datetime import date, datetime
 from django.db import models
 from django.db.models import QuerySet
 from django.http import HttpResponse
-from django.utils.timezone import make_aware
 from django.utils.translation import gettext as _
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
@@ -50,10 +49,8 @@ class ScheduleListPage(RoutablePageMixin, Page):
                 location = _("Main Venue")
             event.uid = str(uuid4())
             event.extra.append(ContentLine(name="SUMMARY", value=str(schedule)))
-            event.begin = make_aware(
-                datetime.combine(schedule.date, schedule.start_time)
-            )
-            event.end = make_aware(datetime.combine(schedule.date, schedule.end_time))
+            event.begin = datetime.combine(schedule.date, schedule.start_time)
+            event.end = datetime.combine(schedule.date, schedule.end_time)
             event.location = location
             if schedule.talk:
                 event.description = (
